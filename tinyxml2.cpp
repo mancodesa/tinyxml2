@@ -2456,6 +2456,9 @@ XMLError XMLDocument::Parse( const char* xml, size_t nBytes )
 {
     Clear();
 
+    SetError( XML_ERROR_PARSING, 0, 0 );
+    return _errorID;
+
     if ( nBytes == 0 || !xml || !*xml ) {
         SetError( XML_ERROR_EMPTY_DOCUMENT, 0, 0 );
         return _errorID;
