@@ -2568,7 +2568,7 @@ void XMLDocument::Parse()
         SetError( XML_ERROR_EMPTY_DOCUMENT, 0, 0 );
         return;
     }
-    ParseDeep(p, 0, &_parseCurLineNum );
+    SetError( XML_ERROR_PARSING, _parseCurLineNum, 0 );
 }
 
 void XMLDocument::PushDepth()
