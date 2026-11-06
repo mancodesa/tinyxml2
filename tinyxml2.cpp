@@ -2460,13 +2460,11 @@ XMLError XMLDocument::Parse( const char* xml, size_t nBytes )
         SetError( XML_ERROR_EMPTY_DOCUMENT, 0, 0 );
         return _errorID;
     }
-    if ( nBytes == static_cast<size_t>(-1) ) {
-        nBytes = strlen( xml );
-    }
+    const size_t length = ( nBytes == static_cast<size_t>(-1) ) ? strlen( xml ) : nBytes;
     TIXMLASSERT( _charBuffer == 0 );
-    _charBuffer = new char[ nBytes+1 ];
-    memcpy( _charBuffer, xml, nBytes );
-    _charBuffer[nBytes] = 0;
+    _charBuffer = new char[ length+1 ];
+    memcpy( _charBuffer, xml, length );
+    _charBuffer[length] = 0;
 
     Parse();
     if ( Error() ) {
