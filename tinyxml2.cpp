@@ -2561,14 +2561,13 @@ void XMLDocument::Parse()
     TIXMLASSERT( _charBuffer );
     _parseCurLineNum = 1;
     _parseLineNum = 1;
-    char* p = _charBuffer;
-    p = XMLUtil::SkipWhiteSpace( p, &_parseCurLineNum );
-    p = const_cast<char*>( XMLUtil::ReadBOM( p, &_writeBOM ) );
-    if ( !*p ) {
+    char* p = XMLUtil::SkipWhiteSpace( _charBuffer, &_parseCurLineNum );
+    char* start = const_cast<char*>( XMLUtil::ReadBOM( p, &_writeBOM ) );
+    if ( *start == 0 ) {
         SetError( XML_ERROR_EMPTY_DOCUMENT, 0, 0 );
         return;
     }
-    ParseDeep(p, 0, &_parseCurLineNum );
+    ParseDeep( start, 0, &_parseCurLineNum );
 }
 
 void XMLDocument::PushDepth()
