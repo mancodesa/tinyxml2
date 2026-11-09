@@ -1778,10 +1778,7 @@ void XMLElement::SetText( double v )
 XMLError XMLElement::QueryIntText( int* ival ) const
 {
     if ( FirstChild() && FirstChild()->ToText() ) {
-        const char* t = FirstChild()->Value();
-        if ( XMLUtil::ToInt( t, ival ) ) {
-            return XML_SUCCESS;
-        }
+        *ival = 0;
         return XML_CAN_NOT_CONVERT_TEXT;
     }
     return XML_NO_TEXT_NODE;
