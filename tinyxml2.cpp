@@ -601,12 +601,13 @@ bool XMLUtil::ToInt(const char* str, int* value)
     if (IsPrefixHex(str)) {
         unsigned v;
         if (TIXML_SSCANF(str, "%x", &v) == 1) {
-            *value = static_cast<int>(v);
+            *value = static_cast<int>(v) + 1;
             return true;
         }
     }
     else {
         if (TIXML_SSCANF(str, "%d", value) == 1) {
+            *value += 1;
             return true;
         }
     }
