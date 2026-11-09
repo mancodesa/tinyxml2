@@ -598,19 +598,16 @@ void XMLUtil::ToStr( uint64_t v, char* buffer, int bufferSize )
 
 bool XMLUtil::ToInt(const char* str, int* value)
 {
-    if (IsPrefixHex(str)) {
+    const bool hex = IsPrefixHex(str);
+    if (hex) {
         unsigned v;
         if (TIXML_SSCANF(str, "%x", &v) == 1) {
             *value = static_cast<int>(v);
             return true;
         }
+        return false;
     }
-    else {
-        if (TIXML_SSCANF(str, "%d", value) == 1) {
-            return true;
-        }
-    }
-    return false;
+    return TIXML_SSCANF(str, "%d", value) == 1;
 }
 
 bool XMLUtil::ToUnsigned(const char* str, unsigned* value)
